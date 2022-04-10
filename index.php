@@ -736,7 +736,9 @@
                         $kbd = [
                             'inline' => true,
                             'buttons' => [
-                                [kbd_callback("👍🏻",  COLOR_POSITIVE, array_kbd("meme", $meme_count, "bot", 2)), kbd_callback("👎🏻",  COLOR_NEGATIVE, array_kbd("meme", $meme_count, "bot", 3))]
+                                [kbd_callback("👍🏻",  COLOR_POSITIVE, array_kbd("meme", $meme_count, "bot", 2)), kbd_callback("👎🏻",  COLOR_NEGATIVE, array_kbd("meme", $meme_count, "bot", 3))],
+                                [kbd_callback("Пропустить",  COLOR_DEFAULT, array_kbd("meme", "", "bot", 1))],
+                                [kbd_callback("⬅️ Назад",  COLOR_PRIMARY, array_kbd("meme", "", "bot", 5))]
                             ]
                         ];
 
@@ -827,7 +829,9 @@
                         $kbd = [
                             'inline' => true,
                             'buttons' => [
-                                [kbd_callback("👍🏻",  COLOR_POSITIVE, array_kbd("meme", $meme_count, "bot", 2)), kbd_callback("👎🏻",  COLOR_NEGATIVE, array_kbd("meme", $meme_count, "bot", 3))]
+                                [kbd_callback("👍🏻",  COLOR_POSITIVE, array_kbd("meme", $meme_count, "bot", 2)), kbd_callback("👎🏻",  COLOR_NEGATIVE, array_kbd("meme", $meme_count, "bot", 3))],
+                                [kbd_callback("Пропустить",  COLOR_DEFAULT, array_kbd("meme", "", "bot", 1))],
+                                [kbd_callback("⬅️ Назад",  COLOR_PRIMARY, array_kbd("meme", "", "bot", 5))]
                             ]
                         ];
 

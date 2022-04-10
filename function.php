@@ -575,6 +575,17 @@
             $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
             $myrow = mysqli_fetch_array($result);
 
+            $views = $myrow ['views'] + 1;
+            $user_views = $myrow ['user_views'] + 1;
+
+            $query = "UPDATE meme SET  views = '$views', user_views = '$user_views' WHERE id = '".$meme_id."'";
+            $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
+
+            $meme_count_new = $meme_count + 1;
+
+            $query = "UPDATE users SET meme_count = '$meme_count_new' WHERE vk_id = '".$user_id."'";
+            $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
+
             mysqli_close($link);
 
             $filename = $myrow ['file_name'];
@@ -732,25 +743,13 @@
         $query = "INSERT INTO meme_ratings VALUES (NULL, '$user_id', '$meme_id', 1, 0)";
         $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__FILE__.":".__LINE__.") -  \n\n ".mysqli_error($link)."\n\n Запрос к БД : ".$query));
 
-        $query ="SELECT views, user_views, likes FROM meme WHERE id = '".$meme_id."'";
+        $query ="SELECT likes FROM meme WHERE id = '".$meme_id."'";
         $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
         $myrow = mysqli_fetch_array($result);
 
-        $views = $myrow ['views'] + 1;
-        $user_views = $myrow ['user_views'] + 1;
         $likes = $myrow ['likes'] + 1;
 
-
-        $query = "UPDATE meme SET  views = '$views', user_views = '$user_views', likes = '$likes' WHERE id = '".$meme_id."'";
-        $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
-
-        $query ="SELECT meme_count FROM users WHERE vk_id = '".$user_id."'";
-        $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
-        $myrow = mysqli_fetch_array($result);
-
-        $meme_count = $myrow ['meme_count'] + 1;
-
-        $query = "UPDATE users SET meme_count = '$meme_count' WHERE vk_id = '".$user_id."'";
+        $query = "UPDATE meme SET likes = '$likes' WHERE id = '".$meme_id."'";
         $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
 
         mysqli_close($link);
@@ -770,25 +769,13 @@
         $query = "INSERT INTO meme_ratings VALUES (NULL, '$user_id', '$meme_id', 0, 1)";
         $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__FILE__.":".__LINE__.") -  \n\n ".mysqli_error($link)."\n\n Запрос к БД : ".$query));
 
-        $query ="SELECT views, user_views, dislikes FROM meme WHERE id = '".$meme_id."'";
+        $query ="SELECT dislikes FROM meme WHERE id = '".$meme_id."'";
         $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
         $myrow = mysqli_fetch_array($result);
 
-        $views = $myrow ['views'] + 1;
-        $user_views = $myrow ['user_views'] + 1;
         $dislikes = $myrow ['dislikes'] + 1;
 
-
-        $query = "UPDATE meme SET  views = '$views', user_views = '$user_views', dislikes = '$dislikes' WHERE id = '".$meme_id."'";
-        $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
-
-        $query ="SELECT meme_count FROM users WHERE vk_id = '".$user_id."'";
-        $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
-        $myrow = mysqli_fetch_array($result);
-
-        $meme_count = $myrow ['meme_count'] + 1;
-
-        $query = "UPDATE users SET meme_count = '$meme_count' WHERE vk_id = '".$user_id."'";
+        $query = "UPDATE meme SET dislikes = '$dislikes' WHERE id = '".$meme_id."'";
         $result = mysqli_query($link, $query) or die (messages_send_admin("🆘 Критическая ошибка MySQL (".__LINE__.") -  \n\n ".mysqli_error($link)));
 
         mysqli_close($link);
